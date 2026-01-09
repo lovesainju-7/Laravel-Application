@@ -24,6 +24,10 @@ cd Laravel-Application
 
 
 ### 2. Update .env File
+If .env is missing:
+```bash
+cp .env.example .env
+```
 
 Edit `.env` and configure the database credentials:
 ```env
@@ -35,7 +39,38 @@ DB_USERNAME=laravel
 DB_PASSWORD=secret
 ```
 
-### 3. Build and Start Containers
+### 3. Install Dependencies (needed)
+```bash
+docker-compose exec app composer install
+```
+
+### 4. Generate Application Key
+```bash
+docker-compose exec app php artisan key:generate
+```
+
+### 5. Fix MySQL Permissions (IMPORTANT!)
+```bash
+# Connect to MySQL
+docker-compose exec db mysql -u root -proot
+```
+# Inside MySQL, run:
+```bash
+GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+### 6. Run Database Migrations
+```bash
+docker-compose exec app php artisan migrate
+```
+
+### 7. Access the Application
+
+Open your browser and visit: **http://localhost:8080**
+
+### 8. Build and Start Containers
 ```bash
 # Build and start all containers
 docker-compose up --build -d
@@ -54,35 +89,10 @@ laravel-app     laravel-application   "docker-php-entrypoi…"   app       15 se
 laravel-mysql   mysql:8.0             "docker-entrypoint.s…"   db        15 seconds ago   Up 14 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
 laravel-nginx   nginx:alpine          "/docker-entrypoint.…"   nginx     15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
-
-### 5. Install Dependencies (if needed)
-```bash
-docker-compose exec app composer install
-```
-
-### 6. Generate Application Key
-```bash
-docker-compose exec app php artisan key:generate
-```
-
-### 7. Fix MySQL Permissions (IMPORTANT!)
-```bash
-# Connect to MySQL
-docker-compose exec db mysql -u root -prootpassword
-
-# Inside MySQL, run:
-GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
-FLUSH PRIVILEGES;
-EXIT;
-```
-
-### 8. Run Database Migrations
-```bash
-docker-compose exec app php artisan migrate
-```
-
 ### 9. Access the Application
-
-Open your browser and visit: **http://localhost:8080**
-
+```bash
+# Open your browser and visit:
+http://localhost:8080
+http://localhost:8080/user
+```
 

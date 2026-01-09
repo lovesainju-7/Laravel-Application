@@ -19,7 +19,7 @@ A Laravel application containerized with Docker, Nginx, and MySQL.
 ### 1. Clone the Repository
 ```bash
 git clone "https://github.com/lovesainju-7/Laravel-Application.git"
-cd Laravel_Application
+cd Laravel-Application
 ```
 
 

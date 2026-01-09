@@ -42,6 +42,18 @@ docker-compose up --build -d
 
 # Wait 10-20 seconds for MySQL to initialize
 ```
+Then in bash write:
+```bash
+#check the present state in compose
+docker-compose ps
+```
+You should see something like:
+```bash
+NAME            IMAGE                 COMMAND                  SERVICE   CREATED          STATUS          PORTS
+laravel-app     laravel-application   "docker-php-entrypoi…"   app       15 seconds ago   Up 14 seconds   9000/tcp
+laravel-mysql   mysql:8.0             "docker-entrypoint.s…"   db        15 seconds ago   Up 14 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
+laravel-nginx   nginx:alpine          "/docker-entrypoint.…"   nginx     15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+```
 
 ### 5. Install Dependencies (if needed)
 ```bash

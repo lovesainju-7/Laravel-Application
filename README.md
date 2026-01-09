@@ -73,20 +73,4 @@ docker-compose exec app php artisan migrate
 
 Open your browser and visit: **http://localhost:8080**
 
-## Technology Stack
 
-- **PHP:** 8.4-FPM
-- **Laravel:** 12.46.0
-- **MySQL:** 8.0
-- **Nginx:** Alpine
-- **Docker Compose:** 3.9
-
-## Port Mappings
-
-- **8080** → Nginx (Web Server)
-- **3306** → MySQL Database
-
-## License
-
-This project is open-sourced software licensed under the MIT license.
-EOF

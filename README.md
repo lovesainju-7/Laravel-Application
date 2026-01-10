@@ -66,8 +66,6 @@ EXIT;
 docker-compose exec app php artisan migrate
 ```
 
-### 7. Access the Application
-
 Open your browser and visit: **http://localhost:8080**
 
 ### 8. Build and Start Containers
@@ -90,9 +88,5 @@ laravel-mysql   mysql:8.0             "docker-entrypoint.s…"   db        15 se
 laravel-nginx   nginx:alpine          "/docker-entrypoint.…"   nginx     15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 ```
 ### 9. Access the Application
-```bash
-# Open your browser and visit:
-http://localhost:8080
-http://localhost:8080/user
-```
-
+Open your browser and visit: **http://localhost:8080**
+Open your browser and visit: **http://localhost:8080/user**

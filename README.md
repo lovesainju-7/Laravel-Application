@@ -55,12 +55,19 @@ docker-compose exec app php artisan key:generate
 docker-compose exec db mysql -u root -proot
 ```
 # Inside MySQL, run:
+
+## [ Method 1: If you’re using a MacBook ]
 ```bash
 GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
 FLUSH PRIVILEGES;
 EXIT;
 ```
-
+## [ Method 2: If you’re on Windows ]
+```bash
+GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
+FLUSH PRIVILEGES;
+EXIT;
+```
 ### 6. Run Database Migrations
 ```bash
 docker-compose exec app php artisan migrate

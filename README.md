@@ -55,19 +55,28 @@ docker-compose exec app php artisan key:generate
 docker-compose exec db mysql -u root -proot
 ```
 # Inside MySQL, run:
+I. List all Laravel users
+```sql
+SELECT User, Host FROM mysql.user WHERE User = 'laravel';
+```
+II. Drop all Laravel users
+```sql
+DROP USER IF EXISTS 'laravel'@'%';
+DROP USER IF EXISTS 'laravel'@'localhost';
+DROP USER IF EXISTS 'laravel'@'127.0.0.1';
+```
+III. Create a fresh Laravel user
+```sql
+CREATE USER 'laravel'@'%' IDENTIFIED BY 'secret';
+```
+IV. Finally
+```sql
+GRANT ALL PRIVILEGES ON *.* TO 'laravel'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'laravel'@'%';
+EXIT;
+```
 
-## [ Method 1: If you’re using a MacBook ]
-```bash
-GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
-FLUSH PRIVILEGES;
-EXIT;
-```
-## [ Method 2: If you’re on Windows ]
-```bash
-GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'secret';
-FLUSH PRIVILEGES;
-EXIT;
-```
 ### 6. Run Database Migrations
 ```bash
 docker-compose exec app php artisan migrate
